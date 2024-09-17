@@ -1,0 +1,30 @@
+이미지 다운로드
+
+# docker hub 에서 최신 버전 이미지 다운로드
+$ docker pull <image-name>
+
+# docker hub 에서 특정 버전 이미지 다운로드
+$ docker pull <image-name>:<tag-name>
+
+이미지 조회
+
+# 다운 받은 이미지 조회
+$ docker image ls
+
+이미지 삭제
+
+# 특정 이미지 삭제
+$ docker image rm <image-name or image-id>...
+
+# 실행 중이 아닌 컨테이너에서 사용하고 있는 이미지 강제 삭제하기
+# 실행 중인 컨테이너의 이미지는 삭제할 수 없다.
+$ docker image rm -f <image-name or image-id>...
+
+# 시스템에 있는 모든 이미지의 ID 반환
+$ docker images -q
+
+# 컨테이너에서 사용되지 않고 있는 이미지만 삭제
+$ docker image rm $(docker images -q)
+
+# 실행 중이 아닌 컨테이너의 이미지 포함 전체 삭제
+$ docker image rm -f $(docker images -q)
