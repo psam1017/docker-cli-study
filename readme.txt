@@ -20,6 +20,12 @@ $ docker pull <image-name>
 # docker hub 에서 특정 버전 이미지 다운로드
 $ docker pull <image-name>:<tag-name>
 
+이미지 생성
+# Dockerfile 이 있는 위치에서 이미지 생성
+# -t : 이미지의 태그(버전). 명시하지 않는 경우 기본값 lastest
+# . : Dockerfile 이 위치한 경로. '.' 은 현재 경로에 있음을 의미한다. 상대경로 및 절대경로 모두 사용가능하다.
+$ docker build -t <image-name>:<tag-name> .
+
 이미지 조회
 
 # 다운 받은 이미지 조회
