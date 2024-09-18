@@ -1,0 +1,46 @@
+도커 스웜
+# 준비사항 : 2개 이상의 인스턴스, port 번호 (2377, 4789, 7649) 개방
+# 도커스웜 네트워크 : 클러스터 내 인스턴스들은 네크워크를 공유하고 있기에 어느 호스트로 서비스를 호출하더라도 동일하게 응답한다.
+
+# 스웜 실행. 실행 시 매니저 노드로 지정됨
+$ docker swarm init
+
+# 스웜 종료
+$ docker swarm leave
+
+# 워커 노드로 참가. 스웜 실행 후 출력된 명령어를 복사하여 매니저 노드가 아닌 인스턴스에서 입력
+$ docker swarm join --token xxx-yyy-zzz 1.2.3.4:2377
+
+# 노드 조회
+$ docker node ls
+
+# 노드 삭제
+$ docker node rm [node-id]
+
+# 서비스 실행
+$ docker service create -p [host-ip]:[container-ip] --name [container-name] --replicas [replica-amount] [image-name]
+
+# 서비스 조회. 동일한 서비스는 한 번 출력된다.
+$ docker service ls
+
+# 서비스 로그 조회
+$ docker service logs [service-id or service-name]
+
+# 실행 중인 모든 태스크 조회. 복사본 개수만큼 모두 출력된다.
+$ docker node ps
+
+# 특정 서비스로 실행 중인 모든 태스크 조회
+$ docker service ps [service-id or service-name]
+
+# 서비스 종료. 컨테이너도 같이 종료된다.
+$ docker service rm [service-id or service-name]
+
+# 도커 컴포즈로 여러 서비스를 실행
+$ docker stack deploy -c [compose-file-path] [stack-name]
+$ docker stack deploy -c compose.yml project-name
+
+# 서비스 스케일 아웃/인
+$ docker service scale [service-id or service-name]=[replica-amount]
+
+# 서비스 업데이트(롤링 업데이트)
+$ docker service update --image [image-name]:[tag-name] [service-id or service-name]
