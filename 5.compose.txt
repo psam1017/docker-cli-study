@@ -23,3 +23,10 @@ $ docker compose logs
 
 # compose 로 실행한 컨테이너들을 종료
 $ docker compose down
+
+# compose 파일 지정하기
+# -f : 파일을 지정함. 이후 조회나 삭제를 할 때도 아래와 같이 -f 옵션으로 파일을 지정해야 한다.
+$ docker compose -f <file-name> up
+
+# compose-prod.yml 의 프로세스 조회
+$ docker compose -f compose-prod.yml ps

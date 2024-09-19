@@ -24,8 +24,15 @@ $ docker pull [image-name]:[tag-name]
 
 # Dockerfile 이 있는 위치에서 이미지 생성
 # -t : 이미지의 태그(버전). 명시하지 않는 경우 기본값 lastest
-# ./ : Dockerfile 이 위치한 경로. 상대경로 및 절대경로 모두 사용가능하다.
-$ docker build -t [image-name]:[tag-name] ./
+# Build Context : Dockerfile 이 위치한 경로. 상대경로 및 절대경로 모두 사용가능하다.
+# 파일 지정은 -f 옵션으로 할 수 있다.
+$ docker build -t <image-name>:<tag-name> <build-context-path>
+
+# ex) 현재 위치에서 my-app:latest 생성
+$ docker build -t my-app ./
+
+# Dockerfile 지정하여 이미지 생성
+$ docker build -t <image-name>:<tag-name> -f <Dockerfile-path> <build-context-path>
 
 이미지 조회
 
@@ -157,6 +164,13 @@ $ docker compose logs
 
 # compose 로 실행한 컨테이너들을 종료
 $ docker compose down
+
+# compose 파일 지정하기
+# -f : 파일을 지정함. 파일을 지정하여 실행한 경우 조회나 삭제를 할 때도 -f 옵션으로 파일을 지정해야 한다.
+$ docker compose -f <file-name> up
+
+# compose-prod.yml 의 프로세스 조회
+$ docker compose -f compose-prod.yml ps
 
 도커 스웜
 # 준비사항 : 2개 이상의 인스턴스, port 번호 (2377, 4789, 7649) 개방
